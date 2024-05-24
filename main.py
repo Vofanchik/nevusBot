@@ -38,6 +38,7 @@ async def echo_photo_message(msg: Message):
     file_path = file.file_path
     MyBinaryIO = await bot.download_file(file_path)
     prediction = predict_from_binary(MyBinaryIO)
+    del MyBinaryIO
     await msg.answer(f"Кажется {prediction[0]}, уверен на {prediction[1]}%")
 
 

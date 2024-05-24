@@ -3,10 +3,11 @@ from keras.api.preprocessing import image
 from keras.api import models
 import numpy as np
 
+model_loaded = models.load_model('./mela_model.keras')
+class_names = ['Доброкачественная', 'Злокачественная']
+
 
 def predict(img_path):
-    model_loaded = models.load_model('./mela_model.keras')
-    class_names = ['доброкачественная', 'злокачественная']
     img = image.load_img(img_path, target_size=(256, 256))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, 0)
@@ -18,8 +19,6 @@ def predict(img_path):
     return predicted_class, confidence
 
 def predict_from_binary(binary_img):
-    model_loaded = models.load_model('./mela_model.keras')
-    class_names = ['Доброкачественная', 'Злокачественная']
     img = PILImg.open(binary_img)
     img = img.convert('RGB')
     target_size = (256, 256)
